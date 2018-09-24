@@ -1,10 +1,14 @@
 
-public class WetterWerteGUI extends javax.swing.JFrame {
+import java.util.Date;
 
+
+public class WetterWerteGUI extends javax.swing.JFrame {
+WetterModell model =new WetterModell();
 
     public WetterWerteGUI() {
         initComponents();
         setSlider();
+        list.setModel(model);
     }
     public void setSlider(){
       tempSlider.setMinimum(-20);
@@ -74,6 +78,11 @@ public class WetterWerteGUI extends javax.swing.JFrame {
         jScrollPane1.setViewportView(list);
 
         btEinfügen.setText("Einfügen");
+        btEinfügen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btEinfügenActionPerformed(evt);
+            }
+        });
 
         jMenu1.setText("File");
 
@@ -169,6 +178,11 @@ public class WetterWerteGUI extends javax.swing.JFrame {
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
       
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void btEinfügenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEinfügenActionPerformed
+   Date d=new Date();
+        model.add(new WetterWert(tempSlider.getValue(),LuftSlider.getValue(), d));
+    }//GEN-LAST:event_btEinfügenActionPerformed
 
    
     public static void main(String args[]) {
