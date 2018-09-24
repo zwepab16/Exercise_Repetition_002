@@ -19,4 +19,16 @@ protected Date zeitpunkt;
         return s+"%";
     }
 
+    public int getTemperatur() {
+        return temperatur;
+    }
+
+    public int getLuftfeuchtigkeit() {
+        return luftfeuchtigkeit;
+    }
+
+    public Date getZeitpunkt() {
+        return zeitpunkt;
+    }
+
 }

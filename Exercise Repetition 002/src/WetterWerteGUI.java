@@ -172,7 +172,7 @@ WetterModell model =new WetterModell();
     }//GEN-LAST:event_miLadenActionPerformed
 
     private void miSpeichernActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miSpeichernActionPerformed
-    
+model.save();
     }//GEN-LAST:event_miSpeichernActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
