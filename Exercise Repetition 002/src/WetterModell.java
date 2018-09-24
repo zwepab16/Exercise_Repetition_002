@@ -1,7 +1,10 @@
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.AbstractListModel;
 import javax.swing.JFileChooser;
@@ -26,9 +29,10 @@ return list.size();
         fireIntervalAdded(this, list.size()-1, list.size()-1);
     }
    
- public void save() {
+ public int save() {
+     int anz =0;
      System.out.println("sas");
-        JFileChooser chooser = new JFileChooser("C:\\Users\\Zwetti Patrick\\Documents\\3.Jahrgang\\POS\\Neuer Ordner\\Exercise_Repetition_002");
+        JFileChooser chooser = new JFileChooser(System.getProperty("user.dir"));
         chooser.showSaveDialog(chooser);
     
        
@@ -36,14 +40,47 @@ return list.size();
           try (BufferedWriter bw = new BufferedWriter(
                 new FileWriter(f))) {  
             for (WetterWert wert : list) {
+                anz++;
                 bw.write(wert.zeitpunkt.getTime() + ",");
                 bw.write(wert.temperatur + ",");
-                bw.write(wert.luftfeuchtigkeit);
+                bw.write(wert.luftfeuchtigkeit+"");
                 bw.newLine();
             
             }
         } catch (Exception ex) {
         }
+          return anz;
     }
+ public void laden(){
+     list.clear();
+     int anz=0;
+      JFileChooser chooser = new JFileChooser(System.getProperty("user.dir"));
+        chooser.showSaveDialog(chooser);
+        File f =   chooser.getSelectedFile();
+        
+         try (BufferedReader br = new BufferedReader(
+                new FileReader(f))) {
+
+            String line;
+            while ((line = br.readLine()) != null) {
+              anz++;
+                try {
+
+                    WetterWert w = new WetterWert(line);
+                 list.add(w);
+
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
+
+            }
+              fireIntervalAdded(this, list.size()-1, list.size()-1);
+             System.out.println(list.size());
+        } catch (IOException ex) {
+             System.out.println(ex.getMessage());
+        }
+
+      
+ }
 
 }
