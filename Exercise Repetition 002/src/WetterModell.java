@@ -14,6 +14,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class WetterModell extends AbstractListModel {
 private ArrayList<WetterWert> list=new ArrayList();
+private String spNa,laNa;
 
     @Override
     public int getSize() {
@@ -31,12 +32,13 @@ return list.size();
    
  public int save() {
      int anz =0;
-     System.out.println("sas");
+   
         JFileChooser chooser = new JFileChooser(System.getProperty("user.dir"));
         chooser.showSaveDialog(chooser);
     
        
          File f =   chooser.getSelectedFile();
+         spNa=f.getName();
           try (BufferedWriter bw = new BufferedWriter(
                 new FileWriter(f))) {  
             for (WetterWert wert : list) {
@@ -51,14 +53,14 @@ return list.size();
         }
           return anz;
     }
- public void laden(){
+ public int laden(){
      list.clear();
      int anz=0;
       JFileChooser chooser = new JFileChooser(System.getProperty("user.dir"));
         chooser.showSaveDialog(chooser);
         File f =   chooser.getSelectedFile();
-        
-         try (BufferedReader br = new BufferedReader(
+        laNa=f.getName();
+                try (BufferedReader br = new BufferedReader(
                 new FileReader(f))) {
 
             String line;
@@ -80,7 +82,13 @@ return list.size();
              System.out.println(ex.getMessage());
         }
 
-      
+     return anz;
+ }
+ public String getSpeichernName(){
+    return spNa;
+ }
+ public String getLadenName(){
+    return laNa;
  }
 
 }

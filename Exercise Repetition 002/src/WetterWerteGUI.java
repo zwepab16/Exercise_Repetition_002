@@ -5,8 +5,10 @@ import javax.swing.JOptionPane;
 
 public class WetterWerteGUI extends javax.swing.JFrame {
 WetterModell model =new WetterModell();
+private String title="unbekannt";
 
     public WetterWerteGUI() {
+     this.setTitle(title);
         initComponents();
         setSlider();
         list.setModel(model);
@@ -169,15 +171,20 @@ WetterModell model =new WetterModell();
     }//GEN-LAST:event_LuftSliderStateChanged
 
     private void miLadenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miLadenActionPerformed
-     model.laden();
+    JOptionPane.showMessageDialog(null,model.laden()+" Eintäge wurden geladen!");
+    title=model.getLadenName();
+     this.setTitle(title);
     }//GEN-LAST:event_miLadenActionPerformed
 
     private void miSpeichernActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miSpeichernActionPerformed
         JOptionPane.showMessageDialog(null,model.save()+" Eintäge wurden gespeichert!");
+        title=model.getSpeichernName();
+        this.setTitle(title);
     }//GEN-LAST:event_miSpeichernActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
       System.exit(0);
+   
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void btEinfügenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEinfügenActionPerformed
